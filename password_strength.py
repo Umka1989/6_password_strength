@@ -57,7 +57,7 @@ def is_camel_case(password):
 def has_special_symbols(password):
     count_of_special_symbols = sum(
         1 for symbol in password if symbol.isalnum())
-    if count_of_special_symbols in range(0, len(password)):
+    if count_of_special_symbols in range(len(password)):
         return 2
     elif count_of_special_symbols > 0:
         return 1
