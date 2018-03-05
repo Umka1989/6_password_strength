@@ -64,11 +64,11 @@ def result_counter(password):
     if is_in_black_list(password) == 1:
         return 0
     else:
-        score += sum([length_checker(password),
-                     is_all_digits(password),
-                     is_all_letters(password),
-                     is_camel_case(password),
-                     has_special_symbols(password)])
+        score += sum([rate_length(password),
+                      is_all_digits(password),
+                      is_all_letters(password),
+                      rate_for_camel_case(password),
+                      rate_for_special_symbols(password)])
     score = (score if score < 9 else score + bonus_for_all_passed)
     return score
 
