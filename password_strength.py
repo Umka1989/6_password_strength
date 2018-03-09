@@ -41,9 +41,10 @@ def rate_for_camel_case(password):
     count_of_lower_case_letters = sum(
         1 for symbol in password if symbol.lower())
 
-    return sum([bool(count_of_upper_case_letters),
-               bool(count_of_lower_case_letters),
-                ])
+    return sum([
+        bool(count_of_upper_case_letters),
+        bool(count_of_lower_case_letters),
+        ])
 
 
 def rate_for_special_symbols(password):
@@ -53,23 +54,24 @@ def rate_for_special_symbols(password):
     return bool(count_of_special_symbols) * multiplier_bonus
 
 
-def result_counter(password, black_list):
+def count_result(password, black_list):
     bonus_for_all_passed = 1
     score = 1
     if is_in_black_list(password, black_list) == 1:
         return 0
     else:
-        score += sum([rate_length(password),
-                      is_all_digits(password),
-                      is_all_letters(password),
-                      rate_for_camel_case(password),
-                      rate_for_special_symbols(password),
-                      ])
+        score += sum([
+            rate_length(password),
+            is_all_digits(password),
+            is_all_letters(password),
+            rate_for_camel_case(password),
+            rate_for_special_symbols(password),
+        ])
     score = (score if score < 9 else score + bonus_for_all_passed)
     return score
 
 
-def result_printer(score):
+def print_result(score):
     print('On scale of 1 to 10 your password got {}'.format(score))
 
 
@@ -80,5 +82,5 @@ if __name__ == '__main__':
         black_list = load_black_list()
 
     password = getpass.getpass('Please enter your password')
-    score = result_counter(password, black_list)
-    result_printer(score)
+    score = count_result(password, black_list)
+    print_result(score)
